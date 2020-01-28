@@ -158,7 +158,6 @@ public class ORDSTestsDay3 {
                 accept("application/json").
            when().
                 get("/employees").thenReturn().jsonPath().get("items.salary");
-
         Collections.sort(salaries);
         System.out.println(salaries);
 
