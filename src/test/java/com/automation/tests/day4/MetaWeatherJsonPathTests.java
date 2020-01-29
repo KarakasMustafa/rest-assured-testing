@@ -138,10 +138,9 @@ public class MetaWeatherJsonPathTests {
         then().
                 assertThat().
                 statusCode(200).
-                body("items.location_type",everyItem(equalTo("City"))).
+                body("items.location_type",everyItem(is("City"))).
                 log().all(true);
     }
-
 
     /**
      *TASK
@@ -170,13 +169,9 @@ public class MetaWeatherJsonPathTests {
         when().
                 get("/location/{woeid}");
        // response.prettyPrint();
-
-
         List<?> listOfLocation = response.jsonPath().getList("sources.title");
 
         assertEquals(list,listOfLocation);
-
-
     }
 
 }
