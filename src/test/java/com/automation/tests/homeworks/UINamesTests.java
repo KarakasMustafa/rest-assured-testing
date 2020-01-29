@@ -130,8 +130,8 @@ public class UINamesTests {
 
         List<Map<String,String>> list = response.jsonPath().get();  // get all the contents in List of Map
 
-        for (int i=0; i<list.size(); i++){
-            for (int j=1; j<list.size(); j++){
+        for (int i=0; i<list.size(); i++){      // we get each element from list and put in nested loop
+            for (int j=1; j<list.size(); j++){  // to compare with rest of the elements but
                 if(i==j)                        // we skip same index to prevent assertion error.
                     continue;
                 assertNotEquals(list.get(i).get("name")+list.get(i).get("surname"),
