@@ -130,11 +130,15 @@ public class UINamesTests {
 
         List<Map<String,String>> list = response.jsonPath().get();  // get all the contents in List of Map
 
-        for (int i=0; i<list.size()-1; i++){  // here we are iterating each object and comparing with the next one.
-                                            // and its gonna end before the last index, otherwise it will be null (last index + 1)
-            assertNotEquals(list.get(i).get("name")+list.get(i).get("surname"),
-                    list.get(i+1).get("name")+list.get(i+1).get("surname"));
+        for (int i=0; i<list.size(); i++){
+            for (int j=1; j<list.size(); j++){
+                if(i==j)                        // we skip same index to prevent assertion error.
+                    continue;
+                assertNotEquals(list.get(i).get("name")+list.get(i).get("surname"),
+                        list.get(j).get("name")+list.get(j).get("surname"));
+            }
         }
+
     }
 
     @Test
