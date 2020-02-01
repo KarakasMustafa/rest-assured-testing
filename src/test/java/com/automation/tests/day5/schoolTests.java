@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.Matchers.*;
@@ -24,7 +23,7 @@ public class schoolTests {
         Response response = given().
                                 accept(ContentType.JSON).
                 when().
-                        delete("/student/delete/{id}",2559);
+                        delete("/student/delete/{id}",2560);
     }
 
     @Test
@@ -71,7 +70,5 @@ public class schoolTests {
                             contentType(ContentType.JSON).
                         body(student).
                         post("/student/create").prettyPeek();
-
-
     }
 }
