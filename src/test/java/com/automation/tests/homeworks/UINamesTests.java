@@ -176,7 +176,6 @@ public class UINamesTests {
                 assertThat().statusCode(200).contentType("application/json; charset=utf-8").log().all();
 
         List<?> list = response.jsonPath().get();
-
         assertEquals(120,list.size());
     }
 
