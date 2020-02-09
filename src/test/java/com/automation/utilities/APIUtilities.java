@@ -92,4 +92,47 @@ public class APIUtilities {
         }
     }
 
+    /**
+     * Method that generates access token
+     *
+     * @return bearer token
+     */
+    public static String getTokenForBookit() {
+        Response response = given().
+                queryParam("email", ConfigurationReader.getProperty("team.leader.email")).
+                queryParam("password", ConfigurationReader.getProperty("team.leader.password")).
+                when().
+                get("/sign").prettyPeek();
+        return response.jsonPath().getString("accessToken");
+    }
+
+    /**
+     * Method that generates access token
+     * @param role - type of user. allowed types: student team leader, student team member and teacher
+     * @return bearer token
+     */
+    public static String getTokenForBookit(String role){
+        String username = "";
+        String password = "";
+        if(role.toLowerCase().contains("lead")){
+            username = ConfigurationReader.getProperty("team.leader.email");
+            password = ConfigurationReader.getProperty("team.leader.password");
+        }else if(role.toLowerCase().contains("teacher")){
+            username = ConfigurationReader.getProperty("teacher.email");
+            password = ConfigurationReader.getProperty("teacher.password");
+        }else if(role.toLowerCase().contains("member")){
+            username = ConfigurationReader.getProperty("team.member.email");
+            password = ConfigurationReader.getProperty("team.member.password");
+        }else {
+            throw new RuntimeException("Invalid user type!");
+        }
+
+        Response response = given().
+                queryParam("email",ConfigurationReader.getProperty("team.leader.email")).
+                queryParam("password",ConfigurationReader.getProperty("team.leader.password")).
+                when().
+                get("/sign").prettyPeek();
+        return response.jsonPath().getString("accessToken");
+    }
+
 }
